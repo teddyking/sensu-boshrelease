@@ -15,3 +15,7 @@ ruby/rubygems-2.4.6.tgz:
   object_id: 84c30b28-97a7-42de-bdea-e37899515d1a
   sha: bf59306c0f6c37551875e70ce8ccfb1cbc60c28b
   size: 447588
+sensu/sensu-0.20.1.tar.gz:
+  object_id: bb91b781-ee87-4af9-9848-f636b406ac61
+  sha: e1f5dc1c674b2e4c5dd908252a5fa48d12b9bb3b
+  size: 70157

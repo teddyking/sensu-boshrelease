@@ -1,0 +1,13 @@
+#!/bin/bash
+
+set -e
+
+export PATH=/var/vcap/packages/ruby/bin:$PATH
+
+tar -zxf sensu/sensu-0.20.1.tar.gz
+mv sensu-0.20.1/* ${BOSH_INSTALL_TARGET}
+
+cd ${BOSH_INSTALL_TARGET}
+bundle
+bundle install --deployment
+
