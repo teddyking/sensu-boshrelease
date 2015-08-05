@@ -1,0 +1,3 @@
+[submodule "src/sensu"]
+	path = src/sensu
+	url = https://github.com/sensu/sensu.git
