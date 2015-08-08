@@ -1,0 +1,33 @@
+---
+name: sensu
+description: Runs the sensu {api,server,client} service.
+
+packages:
+  - common
+  - ruby
+  - sensu
+
+templates:
+  bin/sensu_ctl.erb: bin/sensu_ctl
+  config/config.json.erb: config/config.json
+
+properties:
+  sensu.rabbitmq.host:
+    description: RabbitMQ host address.
+  sensu.rabbitmq.port:
+    description: RabbitMQ port.
+    default: 5672
+  sensu.rabbitmq.user:
+    description: RabbitMQ user.
+  sensu.rabbitmq.password:
+    description: RabbitMQ password.
+  sensu.rabbitmq.vhost:
+    description: RabbitMQ vhost.
+
+  sensu.redis.host:
+    description: Redis host address.
+  sensu.redis.port:
+    description: Redis port.
+    default: 6379
+  sensu.redis.password:
+    description: Redis password.

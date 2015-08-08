@@ -1,0 +1,5 @@
+check process sensu
+  with pidfile /var/vcap/sys/run/sensu/sensu.pid
+  start program "/var/vcap/jobs/sensu/bin/sensu_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/sensu/bin/sensu_ctl stop"
+  group vcap

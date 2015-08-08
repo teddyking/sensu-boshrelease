@@ -1,0 +1,46 @@
+{
+  "rabbitmq": {
+    "host": "<%= p('sensu.rabbitmq.host') %>",
+    "port": <%= p('sensu.rabbitmq.port') %>,
+    "user": "<%= p('sensu.rabbitmq.user') %>",
+    "password": "<%= p('sensu.rabbitmq.password') %>",
+    "vhost": "<%= p('sensu.rabbitmq.vhost') %>"
+  },
+  "redis": {
+    "host": "<%= p('sensu.redis.host') %>",
+    "port": <%= p('sensu.redis.port') %>,
+    "password": "<%= p('sensu.redis.password') %>"
+  },
+  "api": {
+    "host": "localhost",
+    "port": 4567
+  },
+  "handlers": {
+    "default": {
+      "type": "set",
+      "handlers": [
+        "stdout"
+      ]
+    },
+    "stdout": {
+      "type": "pipe",
+      "command": "cat"
+    }
+  },
+  "checks": {
+    "test": {
+      "command": "echo -n OK",
+      "subscribers": [
+        "test"
+      ],
+      "interval": 60
+    }
+  },
+  "client": {
+    "name": "localhost",
+    "address": "127.0.0.1",
+    "subscriptions": [
+      "test"
+    ]
+  }
+}
