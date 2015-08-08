@@ -1,5 +1,12 @@
-check process sensu
-  with pidfile /var/vcap/sys/run/sensu/sensu.pid
-  start program "/var/vcap/jobs/sensu/bin/sensu_ctl start" with timeout 30 seconds
-  stop program "/var/vcap/jobs/sensu/bin/sensu_ctl stop"
+check process sensu-server
+  with pidfile /var/vcap/sys/run/sensu/sensu-server.pid
+  start program "/var/vcap/jobs/sensu/bin/sensu-server_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/sensu/bin/sensu-server_ctl stop"
+  group vcap
+
+check process sensu-api
+  with pidfile /var/vcap/sys/run/sensu/sensu-api.pid
+  start program "/var/vcap/jobs/sensu/bin/sensu-api_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/sensu/bin/sensu-api_ctl stop"
+  depends on sensu-server
   group vcap

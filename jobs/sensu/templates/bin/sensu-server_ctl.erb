@@ -1,0 +1,39 @@
+#!/bin/bash
+
+set -e
+
+JOB_DIR=/var/vcap/jobs/sensu
+LOG_DIR=/var/vcap/sys/log/sensu
+RUN_DIR=/var/vcap/sys/run/sensu
+PID_FILE=$RUN_DIR/sensu-server.pid
+
+export PATH=/var/vcap/packages/ruby/bin:/var/vcap/packages/sensu/bin:$PATH
+export GEM_PATH=/var/vcap/packages/sensu/vendor/bundle/ruby/2.1.0
+
+source /var/vcap/packages/common/utils.sh
+
+case $1 in
+  start)
+    mkdir -p $LOG_DIR $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR $RUN_DIR
+
+    exec chpst -u vcap:vcap sensu-server \
+      -c $JOB_DIR/config/config.json \
+      -l $LOG_DIR/sensu-server.log \
+      -p $PID_FILE \
+      -b \
+      1>> $LOG_DIR/sensu-server_ctl.stdout.log \
+      2>> $LOG_DIR/sensu-server_ctl.stderr.log
+
+    ;;
+  stop)
+    kill_and_wait $PID_FILE
+
+    ;;
+  *)
+    echo "Usage: sensu-server_ctl {start|stop}"
+
+    ;;
+
+esac
+exit 0

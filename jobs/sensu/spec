@@ -8,7 +8,8 @@ packages:
   - sensu
 
 templates:
-  bin/sensu_ctl.erb: bin/sensu_ctl
+  bin/sensu-api_ctl.erb: bin/sensu-api_ctl
+  bin/sensu-server_ctl.erb: bin/sensu-server_ctl
   config/config.json.erb: config/config.json
 
 properties:

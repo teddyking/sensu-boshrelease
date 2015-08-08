@@ -5,7 +5,7 @@ set -e
 JOB_DIR=/var/vcap/jobs/sensu
 LOG_DIR=/var/vcap/sys/log/sensu
 RUN_DIR=/var/vcap/sys/run/sensu
-PID_FILE=$RUN_DIR/sensu.pid
+PID_FILE=$RUN_DIR/sensu-api.pid
 
 export PATH=/var/vcap/packages/ruby/bin:/var/vcap/packages/sensu/bin:$PATH
 export GEM_PATH=/var/vcap/packages/sensu/vendor/bundle/ruby/2.1.0
@@ -17,13 +17,13 @@ case $1 in
     mkdir -p $LOG_DIR $RUN_DIR
     chown -R vcap:vcap $LOG_DIR $RUN_DIR
 
-    exec chpst -u vcap:vcap sensu-server \
+    exec chpst -u vcap:vcap sensu-api \
       -c $JOB_DIR/config/config.json \
-      -l $LOG_DIR/sensu.log \
+      -l $LOG_DIR/sensu-api.log \
       -p $PID_FILE \
       -b \
-      1>> $LOG_DIR/sensu_ctl.stdout.log \
-      2>> $LOG_DIR/sensu_ctl.stderr.log
+      1>> $LOG_DIR/sensu-api_ctl.stdout.log \
+      2>> $LOG_DIR/sensu-api_ctl.stderr.log
 
     ;;
   stop)
@@ -31,7 +31,7 @@ case $1 in
 
     ;;
   *)
-    echo "Usage: sensu_ctl {start|stop}"
+    echo "Usage: sensu-api_ctl {start|stop}"
 
     ;;
 
