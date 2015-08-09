@@ -23,3 +23,7 @@ golang/go1.4.2.linux-amd64.tar.gz:
   object_id: 25a3e9b1-9264-4b3a-adb2-68a25e783feb
   sha: 5020af94b52b65cc9b6f11d50a67e4bae07b0aff
   size: 62442704
+python/Python-2.7.9.tar.xz:
+  object_id: 753d1235-5bc9-4ed1-88d2-15795593ce7b
+  sha: 3172f6e957713c2d9fca462cc16068222fd1b9d3
+  size: 12164712
