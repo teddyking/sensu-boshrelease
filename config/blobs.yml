@@ -19,3 +19,7 @@ sensu/sensu-0.20.1.tar.gz:
   object_id: bb91b781-ee87-4af9-9848-f636b406ac61
   sha: e1f5dc1c674b2e4c5dd908252a5fa48d12b9bb3b
   size: 70157
+golang/go1.4.2.linux-amd64.tar.gz:
+  object_id: 25a3e9b1-9264-4b3a-adb2-68a25e783feb
+  sha: 5020af94b52b65cc9b6f11d50a67e4bae07b0aff
+  size: 62442704
