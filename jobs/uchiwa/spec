@@ -1,0 +1,30 @@
+---
+name: uchiwa
+description: Runs the uchiwa dashboard.
+
+packages:
+  - common
+  - node
+  - uchiwa
+
+templates:
+  bin/uchiwa_ctl.erb: bin/uchiwa_ctl
+  config/config.json.erb: config/config.json
+
+properties:
+  sensu.api.host:
+    description: Sensu API host address.
+    default: localhost
+  sensu.api.port:
+    description: Sensu API port.
+    default: 4567
+
+  uchiwa.host:
+    description: Address on which Uchiwa will listen.
+    default: localhost
+  uchiwa.port:
+    description: Port on which Uchiwa will listen.
+    default: 3000
+  uchiwa.refresh:
+    description: Determines the interval to pull the Sensu APIs, in seconds.
+    default: 5

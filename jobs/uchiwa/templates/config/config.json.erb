@@ -1,0 +1,14 @@
+{
+  "sensu": [
+    {
+      "name": "Site 1",
+      "host": "<%= p('sensu.api.host') %>",
+      "port": <%= p('sensu.api.port') %>
+    }
+  ],
+  "uchiwa": {
+    "host": "<%= p('uchiwa.host') %>",
+    "port": <%= p('uchiwa.port') %>,
+    "refresh": <%= p('uchiwa.refresh') %>
+  }
+}

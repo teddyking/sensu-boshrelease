@@ -1,0 +1,6 @@
+check process uchiwa
+  with pidfile /var/vcap/sys/run/uchiwa/uchiwa.pid
+  start program "/var/vcap/jobs/uchiwa/bin/uchiwa_ctl start" with timeout 30 seconds
+  stop program "/var/vcap/jobs/uchiwa/bin/uchiwa_ctl stop"
+  group vcap
+

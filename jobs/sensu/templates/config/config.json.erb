@@ -12,8 +12,8 @@
     "password": "<%= p('sensu.redis.password') %>"
   },
   "api": {
-    "host": "localhost",
-    "port": 4567
+    "host": "<%= p('sensu.api.host') %>",
+    "port": <%= p('sensu.api.port') %>
   },
   "handlers": {
     "default": {

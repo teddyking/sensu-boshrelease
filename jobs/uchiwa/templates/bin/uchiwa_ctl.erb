@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+
+case $1 in
+
+  start)
+
+    # Setup required directories
+    mkdir -p /var/vcap/sys/log/uchiwa
+    mkdir -p /var/vcap/sys/run/uchiwa
+
+    # Set file permissions
+    chown -H vcap:vcap /var/vcap/sys/log/uchiwa
+    chown -H vcap:vcap /var/vcap/sys/run/uchiwa
+
+    start-stop-daemon --start --quiet -m \
+      --pidfile /var/vcap/sys/run/uchiwa/uchiwa.pid \
+      --startas /var/vcap/packages/uchiwa/bin/uchiwa \
+      --chuid vcap:vcap \
+      --background \
+      --no-close \
+      --chdir /var/vcap/packages/uchiwa \
+      -- -c="/var/vcap/jobs/uchiwa/config/config.json" \
+      1>> /var/vcap/sys/log/uchiwa/uchiwa.stdout.log \
+      2>> /var/vcap/sys/log/uchiwa/uchiwa.stderr.log
+    ;;
+
+  stop)
+    start-stop-daemon --stop --quiet --retry=0/0/KILL/5 \
+      --pidfile /var/vcap/sys/run/uchiwa/uchiwa.pid \
+      1>> /var/vcap/sys/log/uchiwa/uchiwa.stdout.log \
+      2>> /var/vcap/sys/log/uchiwa/uchiwa.stderr.log
+
+    rm -f /var/vcap/sys/run/uchiwa/uchiwa.pid
+    ;;
+  *)
+    echo "Usage: $0 {start|stop}"
+    ;;
+
+esac
+exit 0
+

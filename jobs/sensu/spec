@@ -13,6 +13,13 @@ templates:
   config/config.json.erb: config/config.json
 
 properties:
+  sensu.api.host:
+    description: Sensu API host address.
+    default: localhost
+  sensu.api.port:
+    description: Sensu API port.
+    default: 4567
+
   sensu.rabbitmq.host:
     description: RabbitMQ host address.
   sensu.rabbitmq.port:
