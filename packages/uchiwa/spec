@@ -1,0 +1,8 @@
+---
+name: uchiwa
+
+dependencies:
+  - golang
+
+files:
+- uchiwa/uchiwa-0.10.3.tar.gz

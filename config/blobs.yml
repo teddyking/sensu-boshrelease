@@ -31,3 +31,7 @@ python/Python-2.7.9.tar.xz:
   object_id: 753d1235-5bc9-4ed1-88d2-15795593ce7b
   sha: 3172f6e957713c2d9fca462cc16068222fd1b9d3
   size: 12164712
+uchiwa/uchiwa-0.10.3.tar.gz:
+  object_id: fd7a6d19-05ed-49b6-bb82-5e6303acad3e
+  sha: 414903a8777202f79fc2ef2919e75cecef651174
+  size: 72004

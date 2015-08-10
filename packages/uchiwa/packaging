@@ -1,0 +1,19 @@
+#!/bin/bash
+
+set -e
+
+# create a GOPATH at ${BOSH_INSTALL_TARGET} and copy uchiwa onto it.
+UCHIWA_GOPATH=${BOSH_INSTALL_TARGET}/src/github.com/sensu/uchiwa
+
+mkdir -p $UCHIWA_GOPATH
+tar -zxf uchiwa/uchiwa-0.10.3.tar.gz
+mv uchiwa-0.10.3/* $UCHIWA_GOPATH
+
+export GOROOT=$(readlink -nf /var/vcap/packages/golang)
+export GOPATH=${BOSH_INSTALL_TARGET}:${UCHIWA_GOPATH}/Godeps/_workspace
+export PATH=$GOROOT/bin:$PATH
+
+go install github.com/sensu/uchiwa
+
+rm -rf ${BOSH_INSTALL_TARGET}/{src,pkg}
+
