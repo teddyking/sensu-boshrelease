@@ -35,3 +35,7 @@ uchiwa/uchiwa-0.10.3.tar.gz:
   object_id: fd7a6d19-05ed-49b6-bb82-5e6303acad3e
   sha: 414903a8777202f79fc2ef2919e75cecef651174
   size: 72004
+git/git-1.7.11.2.tar.gz:
+  object_id: 418befb7-4205-4e65-90af-c25eb5ec75be
+  sha: f67b4f6c0277250411c6872ae7b8a872ae11d313
+  size: 4015780
