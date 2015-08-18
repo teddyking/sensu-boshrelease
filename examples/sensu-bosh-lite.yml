@@ -1,0 +1,142 @@
+<%
+  # Update these properties as required
+  deployment_name  = 'sensu-bosh-lite'
+  director_uuid    = '4796378f-cc91-4d93-a1b0-75a9af101708'
+  stemcell_name    = 'bosh-warden-boshlite-ubuntu-trusty-go_agent'
+  stemcell_version = 'latest'
+%>
+
+name: <%= deployment_name %>
+director_uuid: <%= director_uuid %>
+
+releases:
+- name: sensu
+  version: latest
+
+jobs:
+- name: sensu-server
+  templates:
+  - name: sensu
+    release: sensu
+  - name: uchiwa
+    release: sensu
+  instances: 1
+  resource_pool: small_z1
+  persistent_disk: 2048
+  networks:
+  - name: default
+    static_ips:
+    - 10.244.13.2
+
+properties:
+  sensu:
+    api:
+      host: 10.244.13.2
+    rabbitmq:
+      host: my.rabbitmq.service.io
+      user: username
+      password: password
+      vhost: vhost
+    redis:
+      host: my.redis.service.com
+      port: 6379
+      password: password
+  uchiwa:
+    host: 10.244.13.2
+
+meta:
+  environment: <%= deployment_name %>
+  stemcell:
+    name: <%= stemcell_name %>
+    version: <%= stemcell_version %>
+
+resource_pools:
+- cloud_properties:
+    name: random
+  name: small_z1
+  network: default
+  size: 2
+  stemcell:
+    name: <%= stemcell_name %>
+    version: <%= stemcell_version %>
+
+compilation:
+  cloud_properties:
+    name: random
+  network: default
+  reuse_compilation_vms: true
+  workers: 4
+
+update:
+  canaries: 1
+  canary_watch_time: 1000-30000
+  max_in_flight: 50
+  serial: false
+  update_watch_time: 1000-30000
+
+networks:
+- name: default
+  subnets:
+  - cloud_properties:
+      name: random
+    range: 10.244.13.0/30
+    reserved:
+    - 10.244.13.1
+    static:
+    - 10.244.13.2
+  - cloud_properties:
+      name: random
+    range: 10.244.13.4/30
+    reserved:
+    - 10.244.13.5
+    static:
+    - 10.244.13.6
+  - cloud_properties:
+      name: random
+    range: 10.244.13.8/30
+    reserved:
+    - 10.244.13.9
+    static:
+    - 10.244.13.10
+  - cloud_properties:
+      name: random
+    range: 10.244.13.12/30
+    reserved:
+    - 10.244.13.13
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.16/30
+    reserved:
+    - 10.244.13.17
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.20/30
+    reserved:
+    - 10.244.13.21
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.24/30
+    reserved:
+    - 10.244.13.25
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.28/30
+    reserved:
+    - 10.244.13.29
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.32/30
+    reserved:
+    - 10.244.13.33
+    static: []
+  - cloud_properties:
+      name: random
+    range: 10.244.13.36/30
+    reserved:
+    - 10.244.13.37
+    static: []
