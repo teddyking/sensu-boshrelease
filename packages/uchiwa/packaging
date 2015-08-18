@@ -9,11 +9,18 @@ mkdir -p $UCHIWA_GOPATH
 tar -zxf uchiwa/uchiwa-0.10.3.tar.gz
 mv uchiwa-0.10.3/* $UCHIWA_GOPATH
 
+# install the uchiwa backend
 export GOROOT=$(readlink -nf /var/vcap/packages/golang)
 export GOPATH=${BOSH_INSTALL_TARGET}:${UCHIWA_GOPATH}/Godeps/_workspace
 export PATH=$GOROOT/bin:$PATH
 
 go install github.com/sensu/uchiwa
 
-rm -rf ${BOSH_INSTALL_TARGET}/{src,pkg}
+# install the uchiwa frontend
+export PATH=/var/vcap/packages/node/bin:/var/vcap/packages/git/bin:$PATH
+export HOME=/root
+echo -e '{\n  "interactive": false\n}' > ~/.bowerrc
 
+cd ${UCHIWA_GOPATH}
+npm install --production --unsafe-perm
+mv bower_components/ public/

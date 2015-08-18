@@ -2,7 +2,9 @@
 name: uchiwa
 
 dependencies:
+  - git
   - golang
+  - node
 
 files:
 - uchiwa/uchiwa-0.10.3.tar.gz
